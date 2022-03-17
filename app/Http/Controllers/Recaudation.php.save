@@ -1,0 +1,105 @@
+<?php
+
+namespace App\Http\Controllers;
+
+//use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Client as GuzzleClient;
+use Illuminate\Http\Request;
+use App\modelRecaudation;
+use Illuminate\Support\Facades\DB;
+
+class Recaudation extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //$analitico = modelRecaudation::whereIn('sir_fecha_proceso', ['16-01-2021', '17-01-2021'])->paginate(15);
+        //$contador = modelRecaudation::whereIn('sir_fecha_proceso', ['17-01-2021'])->count();
+        //return view('home', compact('totalemployes'));
+        //$response = Http::get('https://mexico-bixxi.ixxi.net/bixxi-api/api/adip/geolocation/latest?size=400');
+        $headers = [
+            'Content-Type' => 'application/json',
+            'X-Auth-Token' => 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOnsidXNlclR5cGUiOiJBR0VOVCIsImlkIjoxMDA4fSwiZXhwIjoxNjEyOTg0OTY0LCJpYXQiOjE2MTI4OTg1NjR9.p47l40-6kiMFnjvjrMlIsghZSW_J04-loEUIEtSb1ss',
+            'Authorization' => 'Bearer token',
+        ];
+        
+        
+        $client = new GuzzleClient([
+            'headers' => $headers
+        ]);
+
+        $r = $client->request('GET', 'https://mexico-bixxi.ixxi.net/bixxi-api/api/adip/geolocation/latest?size=1000');
+        $dato = $r->getBody()->getContents();
+        return $dato;
+
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request, modulRecaudation $gallery)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+}
